@@ -10,7 +10,8 @@ public class Main {
         System.out.println("=-=-= WELCOME TO THE FunFacts APP - YOUR PLACE FOR MATH-RELATED FUN FACTS =-=-=");
         System.out.println("\n=-=-= MENU =-=-=");
         System.out.println("1. Pythagorean Dates");
-        System.out.println("2. Narcissistic (Armstrong) Number Scanner");
+        System.out.println("2. Narcissistic (Armstrong) Numbers");
+        System.out.println("3. Harshad (Niven) Numbers");
         System.out.print("Choose an option: ");
         byte menuChoice = scanner.nextByte();
 
@@ -122,6 +123,24 @@ public class Main {
                     default:
                         System.out.println("Invalid choice");
                 }
+                break;
+            case 3:
+                System.out.println("A Harshad number (also called a Niven number) is an integer that is divisible by the sum of its digits.");
+
+//                Get the input from the user
+                System.out.print("Number: ");
+                int harshadNumber = Math.abs(scanner.nextInt());
+
+                int harshadBuff = harshadNumber;
+                int harshadSum = 0;
+
+//                Calculate the sum of digits
+                do {
+                    harshadSum += harshadBuff % 10;
+                } while ((harshadBuff /= 10) != 0);
+
+                String hverdict = (harshadNumber % harshadSum == 0) ? " " : " not ";
+                System.out.println("The number " + harshadNumber + " is" + hverdict + "a Harshad (Niven) Number");
                 break;
             default:
                 System.out.println("Invalid menu choice!");
