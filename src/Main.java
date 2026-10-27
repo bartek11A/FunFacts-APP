@@ -19,6 +19,7 @@ public class Main {
 //              Year is set to <= 52 instead of <= 126 because only the years up to "26" can form Pythagorean dates
                 System.out.println("\nPythagorean Dates");
                 System.out.println("DD/MM/YYYY");
+//                To add: last and the nearest!
                 for (int year = 1; year <= 52; year++) {
 
                     for (byte month = 1; month <= 12; month++) {
@@ -51,10 +52,32 @@ public class Main {
                 }
                 break;
             case 2:
-                System.out.println("In construction!");
+//                A Narcissistic Number (also called an Armstrong Number) is a number that equals the sum of its own digits, where each digit is raised to the power of the total number of digits.
+//                Users should choose between typing their own numbers and checking if they are narcistic ones or see the list in their range
+//                First typing their own numbers
+                System.out.print("Enter a number that you want to check (negative numbers will be converted to the positive ones): ");
+                int number = Math.abs(scanner.nextInt());
+                int buff = number;
+
+//                Calculate the number of digits
+                byte power = 0;
+                do {
+                    power++;
+                } while ((buff /= 10) != 0);
+
+//                Calculate the sum of the digits where each is raised to the power var
+                buff = number;
+                int sum = 0;
+                do {
+                    sum += Math.powExact((buff % 10), power);
+                } while ((buff /= 10) != 0);
+
+//                Output the message
+                String verdict = (sum == number) ? " " : " not ";
+                System.out.println("The number " + number + " is" + verdict + "a Narcissistic (Armstrong) Number");
                 break;
             default:
-                System.out.println("Inavlid menu choice!");
+                System.out.println("Invalid menu choice!");
         }
     }
 }
