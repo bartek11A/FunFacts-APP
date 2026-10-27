@@ -53,28 +53,75 @@ public class Main {
                 break;
             case 2:
 //                A Narcissistic Number (also called an Armstrong Number) is a number that equals the sum of its own digits, where each digit is raised to the power of the total number of digits.
-//                Users should choose between typing their own numbers and checking if they are narcistic ones or see the list in their range
-//                First typing their own numbers
-                System.out.print("Enter a number that you want to check (negative numbers will be converted to the positive ones): ");
-                int number = Math.abs(scanner.nextInt());
-                int buff = number;
+//                Users should choose between typing their own numbers and checking if they are Narcissistic ones or see the list in their range
+
+//                Declaration
+                int number;
+                int buff;
+                byte power;
+                int sum;
+                System.out.println("=-=-= Narcissistic Number Menu =-=-=");
+                System.out.println("1. Check if your number is a Narcissistic");
+                System.out.println("2. See the list of Narcissistic Numbers up to your limit");
+                System.out.print("Choice: ");
+                byte narcissisticChoice = scanner.nextByte();
+                switch (narcissisticChoice) {
+                    case 1:
+                        System.out.print("Enter the number: ");
+                        number = Math.abs(scanner.nextInt());
+                        buff = number;
 
 //                Calculate the number of digits
-                byte power = 0;
-                do {
-                    power++;
-                } while ((buff /= 10) != 0);
+                        power = 0;
+                        do {
+                            power++;
+                        } while ((buff /= 10) != 0);
 
 //                Calculate the sum of the digits where each is raised to the power var
-                buff = number;
-                int sum = 0;
-                do {
-                    sum += Math.powExact((buff % 10), power);
-                } while ((buff /= 10) != 0);
+                        buff = number;
+                        sum = 0;
+                        do {
+                            sum += Math.powExact((buff % 10), power);
+                        } while ((buff /= 10) != 0);
 
 //                Output the message
-                String verdict = (sum == number) ? " " : " not ";
-                System.out.println("The number " + number + " is" + verdict + "a Narcissistic (Armstrong) Number");
+                        String verdict = (sum == number) ? " " : " not ";
+                        System.out.println("The number " + number + " is" + verdict + "a Narcissistic (Armstrong) Number");
+                        break;
+                    case 2:
+//                        Get the limit from the user
+                        System.out.print("Enter the limit: ");
+                        int limit = scanner.nextInt();
+                        int total = 0;
+
+//                        Loop up to the limit
+                        for (number = 0; number <= limit; number++) {
+//                            Calculate the number of digits
+                            buff = number;
+                            power = 0;
+                            do {
+                                power++;
+                            } while ((buff /= 10) != 0);
+
+//                Calculate the sum of the digits where each is raised to the power var
+                            buff = number;
+                            sum = 0;
+                            do {
+                                sum += Math.powExact((buff % 10), power);
+                            } while ((buff /= 10) != 0);
+
+//                    If the current number is an Armstrong number output it to the user while counting it
+                            if (sum == number) {
+                                System.out.println(number);
+                                total++;
+                            }
+                        }
+//                        Output the total number of Narcissistic numbers
+                        System.out.println("Total: " + total + " (Narcissitic numbers)");
+                        break;
+                    default:
+                        System.out.println("Invalid choice");
+                }
                 break;
             default:
                 System.out.println("Invalid menu choice!");
