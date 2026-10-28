@@ -152,12 +152,13 @@ public class Main {
                 break;
             case 5:
                 int decimalPlaces;
+
                 do {
                     System.out.print("Decimal places (from 1 to 100): ");
                     decimalPlaces = scanner.nextInt();
-                } while (decimalPlaces <= 0);
+                } while (decimalPlaces <= 0 || decimalPlaces > 100);
 
-                System.out.println("=-=-=- e -=-=-=");
+                System.out.println("=-=-=- Euler's number (mathematical constant) -=-=-=");
                 BigDecimal e = BigDecimal.TWO;
                 BigDecimal factorial = BigDecimal.ONE;
 
@@ -169,7 +170,7 @@ public class Main {
 
 //                Round e to the number of decimalPlaces entered by the user and output it
                 e = e.divide(BigDecimal.ONE, decimalPlaces, RoundingMode.HALF_UP);
-                System.out.println(e + "...");
+                System.out.println("e = " + e + "...");
                 break;
             default:
                 System.out.println("Invalid menu choice!");
