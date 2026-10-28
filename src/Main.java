@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class Main {
@@ -13,7 +15,8 @@ public class Main {
         System.out.println("2. Narcissistic (Armstrong) Numbers");
         System.out.println("3. Harshad (Niven) Numbers");
         System.out.println("4. π Infinite digits generaror (Chudnovsky Algorithm)");
-        System.out.println("5. e (Euler's) number generator (TBD Algorithm)");
+//        Algorithm for e adapted from https://en.wikipedia.org/wiki/E_(mathematical_constant)
+        System.out.println("5. e (Euler's) number generator");
         System.out.print("Choose an option: ");
         byte menuChoice = scanner.nextByte();
 
@@ -144,8 +147,28 @@ public class Main {
                 String hverdict = (harshadNumber % harshadSum == 0) ? " " : " not ";
                 System.out.println("The number " + harshadNumber + " is" + hverdict + "a Harshad (Niven) Number");
                 break;
-            case 4, 5:
+            case 4:
                 System.out.println("In construction!");
+                break;
+            case 5:
+                System.out.print("Decimal places (from 1 to 100: ");
+                int decimalPlaces = scanner.nextInt();
+
+                System.out.println("=-=-=- e -=-=-=");
+                BigDecimal e = BigDecimal.TWO;
+                BigDecimal one = BigDecimal.ONE;
+//                Loop that controls the current value of n, 71 is reportedly sufficient for 100 decimal places
+                for (int n = 2; n <= 71; n++) {
+//                    Loop that calculates factorial of n
+                    BigDecimal factorial = BigDecimal.ONE;
+                    for (int i = n; i > 0 ; i--) {
+                        factorial = factorial.multiply(BigDecimal.valueOf(i));
+                    }
+//                    This controls precision, the higher the scale value the greater the precision (don't mistake with decimal places)
+                    e = e.add(one.divide(factorial, 1000, RoundingMode.HALF_UP));
+                }
+                e = e.divide(one, decimalPlaces, RoundingMode.HALF_UP);
+                System.out.println(e + "...");
                 break;
             default:
                 System.out.println("Invalid menu choice!");
