@@ -151,23 +151,24 @@ public class Main {
                 System.out.println("In construction!");
                 break;
             case 5:
-                System.out.print("Decimal places (from 1 to 100: ");
-                int decimalPlaces = scanner.nextInt();
+                int decimalPlaces;
+                do {
+                    System.out.print("Decimal places (from 1 to 100): ");
+                    decimalPlaces = scanner.nextInt();
+                } while (decimalPlaces <= 0);
 
                 System.out.println("=-=-=- e -=-=-=");
                 BigDecimal e = BigDecimal.TWO;
-                BigDecimal one = BigDecimal.ONE;
-//                Loop that controls the current value of n, 71 is reportedly sufficient for 100 decimal places
-                for (int n = 2; n <= 71; n++) {
-//                    Loop that calculates factorial of n
-                    BigDecimal factorial = BigDecimal.ONE;
-                    for (int i = n; i > 0 ; i--) {
-                        factorial = factorial.multiply(BigDecimal.valueOf(i));
-                    }
-//                    This controls precision, the higher the scale value the greater the precision (don't mistake with decimal places)
-                    e = e.add(one.divide(factorial, 1000, RoundingMode.HALF_UP));
+                BigDecimal factorial = BigDecimal.ONE;
+
+//                Loop that calculates e
+                for (int n = 2; n < 100; n++) {
+                    factorial = factorial.multiply(BigDecimal.valueOf(n));
+                    e = e.add(BigDecimal.ONE.divide(factorial, 1000, RoundingMode.HALF_UP));
                 }
-                e = e.divide(one, decimalPlaces, RoundingMode.HALF_UP);
+
+//                Round e to the number of decimalPlaces entered by the user and output it
+                e = e.divide(BigDecimal.ONE, decimalPlaces, RoundingMode.HALF_UP);
                 System.out.println(e + "...");
                 break;
             default:
