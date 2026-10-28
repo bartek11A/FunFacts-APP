@@ -12,6 +12,8 @@ public class Main {
         System.out.println("1. Pythagorean Dates");
         System.out.println("2. Narcissistic (Armstrong) Numbers");
         System.out.println("3. Harshad (Niven) Numbers");
+        System.out.println("4. π Infinite digits generaror (Chudnovsky Algorithm)");
+        System.out.println("5. e (Euler's) number generator (TBD Algorithm)");
         System.out.print("Choose an option: ");
         byte menuChoice = scanner.nextByte();
 
@@ -141,6 +143,9 @@ public class Main {
 
                 String hverdict = (harshadNumber % harshadSum == 0) ? " " : " not ";
                 System.out.println("The number " + harshadNumber + " is" + hverdict + "a Harshad (Niven) Number");
+                break;
+            case 4, 5:
+                System.out.println("In construction!");
                 break;
             default:
                 System.out.println("Invalid menu choice!");
